@@ -84,8 +84,8 @@ describe('components', () => {
     expect(element.hasAttribute('light-dom')).toBe(true);
     expect(element.getAttribute('class')).toBe('card');
 
-    element.dispatchEvent(new CustomEvent('murkio:login', { bubbles: true }));
-    element.dispatchEvent(new CustomEvent('murkio:error', { detail: { code: 'rsb-00' }, bubbles: true }));
+    element.dispatchEvent(new CustomEvent('murkio-login', { bubbles: true }));
+    element.dispatchEvent(new CustomEvent('murkio-error', { detail: { code: 'rsb-00' }, bubbles: true }));
     expect(onLogin).toHaveBeenCalledTimes(1);
     expect(onError).toHaveBeenCalledWith({ code: 'rsb-00' });
   });

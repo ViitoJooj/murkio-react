@@ -8,9 +8,10 @@ interface Listeners {
 }
 
 /**
- * Listens to the `murkio:*` events of a custom element. React does not map
- * event names with a colon, so the listeners are added by hand; the latest
- * callbacks are read from a ref, so re-renders never re-subscribe.
+ * Listens to the `murkio-*` events of a custom element. React 18 does not
+ * attach custom element events from props, so the listeners are added by
+ * hand; the latest callbacks are read from a ref, so re-renders never
+ * re-subscribe.
  */
 function useEvents(listeners: Listeners) {
   const ref = useRef<HTMLElement>(null);
@@ -23,13 +24,13 @@ function useEvents(listeners: Listeners) {
     const login = () => latest.current.onLogin?.();
     const error = (event: Event) => latest.current.onError?.((event as CustomEvent<MurkioError>).detail);
     const step = (event: Event) => latest.current.onStep?.((event as CustomEvent<{ step: string }>).detail.step);
-    node.addEventListener('murkio:login', login);
-    node.addEventListener('murkio:error', error);
-    node.addEventListener('murkio:step', step);
+    node.addEventListener('murkio-login', login);
+    node.addEventListener('murkio-error', error);
+    node.addEventListener('murkio-step', step);
     return () => {
-      node.removeEventListener('murkio:login', login);
-      node.removeEventListener('murkio:error', error);
-      node.removeEventListener('murkio:step', step);
+      node.removeEventListener('murkio-login', login);
+      node.removeEventListener('murkio-error', error);
+      node.removeEventListener('murkio-step', step);
     };
   }, []);
 
