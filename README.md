@@ -47,3 +47,17 @@ Your own layout, styled with your classes (they reach the real `<input>`/`<butto
 - Events: `onLogin`, `onError(error)` (`error.code`) and `onStep(step)` on the canvas and
   the buttons.
 - For Next.js use `@murkio/next`, which adds the server side (middleware, `auth()`).
+
+## Developing
+
+This repository is a git submodule of the Murkio identity service
+(`libs/external/react`) and is developed from there: the JavaScript packages share one
+npm workspace, and the tests read the contract, the vectors and the fixtures every Murkio
+SDK shares (`libs/spec`).
+
+```sh
+# in libs/ of the service repository, cloned with --recurse-submodules
+npm ci
+npm run build
+npm test
+```
