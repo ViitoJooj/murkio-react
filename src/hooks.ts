@@ -36,6 +36,7 @@ export function useUser(): UserState {
   const { claims } = useAuth();
   const [state, setState] = useState<UserState>({ isLoaded: false, user: null, error: null });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the profile is read again when the user or the session changes, not on every token refresh (each one brings a new claims object)
   useEffect(() => {
     if (!murkio) return;
     let active = true;
