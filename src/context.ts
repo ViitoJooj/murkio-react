@@ -16,11 +16,10 @@ export interface MurkioProviderProps extends MurkioOptions {
 export function MurkioProvider({ children, ...options }: MurkioProviderProps) {
   const [murkio, setMurkio] = useState<Murkio | null>(null);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the client is created once per publishable key; other option changes need a reload
   useEffect(() => {
     defineElements();
     setMurkio(init(options));
-    // The client is created once per publishable key; other option changes need a reload.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options.publishableKey]);
 
   return createElement(MurkioContext.Provider, { value: murkio }, children);

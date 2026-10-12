@@ -2,15 +2,7 @@ import { getMurkio, reset } from '@murkio/html';
 import { act, createElement, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  MurkioIdentityCanvas,
-  MurkioIdentityEmailInput,
-  MurkioIdentityLoginButton,
-  MurkioProvider,
-  SignedIn,
-  SignedOut,
-  useAuth,
-} from '../src';
+import { MurkioIdentityCanvas, MurkioIdentityEmailInput, MurkioIdentityLoginButton, MurkioProvider, SignedIn, SignedOut, useAuth } from '../src';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -92,7 +84,9 @@ describe('components', () => {
 
   it('passes the developer classes to the real controls', async () => {
     await render(
-      createElement('div', null,
+      createElement(
+        'div',
+        null,
         createElement(MurkioIdentityEmailInput, { className: 'input input-bordered', placeholder: 'you@example.com' }),
         createElement(MurkioIdentityLoginButton, { className: 'btn' }, 'Sign in'),
       ),
